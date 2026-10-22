@@ -20,6 +20,8 @@ This project uses the RAVDESS emotional speech dataset to classify speech into e
 
 ## Technologies Used
 
+- TensorFlow
+- Keras
 - Python
 - NumPy
 - Pandas
@@ -35,32 +37,50 @@ This project uses the RAVDESS emotional speech dataset to classify speech into e
 ```text
 Task2_Emotion_Recognition/
 ├── src/
-│   ├── extract_features.py
+│   ├── compare_classifiers.py
+│   ├── compare_features.py
 │   ├── extract_audio_features.py
+│   ├── extract_features.py
+│   ├── predict_emotion.py
+│   ├── predict_emotion_cnn.py
+│   ├── prepare_cnn_dataset.py
+│   ├── prepare_cnn_dataset_resampled.py
 │   ├── prepare_dataset.py
 │   ├── prepare_enhanced_dataset.py
+│   ├── test_features.py
+│   ├── train_cnn_model.py
+│   ├── train_cnn_model_resampled.py
+│   ├── train_cnn_model_weighted.py
 │   ├── train_model.py
-│   ├── tune_model.py
-│   ├── compare_features.py
-│   ├── compare_classifiers.py
-│   ├── predict_emotion.py
-│   └── test_features.py
+│   └── tune_model.py
 ├── models/
-│   └── emotion_classifier.joblib
+│   ├── emotion_classifier.joblib
+│   ├── emotion_cnn.keras
+│   ├── emotion_cnn_normalization.npz
+│   ├── emotion_cnn_resampled.keras
+│   ├── emotion_cnn_resampled_normalization.npz
+│   ├── emotion_cnn_weighted.keras
+│   └── emotion_cnn_weighted_normalization.npz
 ├── results/
-│   ├── evaluation.json
-│   ├── svm_tuning_results.json
-│   ├── feature_comparison.json
 │   ├── classifier_comparison.json
+│   ├── cnn_evaluation.json
+│   ├── cnn_evaluation_resampled.json
+│   ├── cnn_evaluation_weighted.json
+│   ├── cnn_out_of_fold_predictions.npz
+│   ├── cnn_out_of_fold_predictions_resampled.npz
+│   ├── cnn_out_of_fold_predictions_weighted.npz
 │   ├── confusion_matrix.png
-│   └── out_of_fold_predictions.npz
+│   ├── evaluation.json
+│   ├── feature_comparison.json
+│   ├── out_of_fold_predictions.npz
+│   └── svm_tuning_results.json
 ├── data/
 │   └── processed/
 ├── README.md
 └── .gitignore
 ```
 
-The raw audio dataset, virtual environment, and regenerable processed feature files are excluded from Git.
+The raw audio dataset, virtual environments, and regenerable processed feature files are excluded from Git. Model files and evaluation artifacts are retained separately for prediction and analysis.
 
 ## Dataset
 
@@ -93,6 +113,10 @@ Install the required packages:
 ```powershell
 python -m pip install numpy pandas scikit-learn librosa scipy matplotlib soundfile joblib pytest
 ```
+
+The packages above support the baseline SVM workflow. The CNN training and prediction workflows additionally require TensorFlow/Keras. Install TensorFlow in a compatible Python environment and verify the installation before running the CNN scripts.
+
+The CNN predictor also requires Librosa and NumPy versions compatible with the saved model and the training environment.
 
 ## Feature Extraction and Dataset Preparation
 
@@ -156,6 +180,35 @@ Predicted emotion: Neutral
 
 Actual predictions may differ depending on the input recording.
 
+## CNN-Based Emotion Prediction
+
+A separate CNN model is available for predicting emotions from WAV audio recordings. It uses 40 MFCC coefficients resampled to 174 frames, with normalization values saved during final model training.
+
+The CNN model and its normalization parameters are stored in:
+
+- `models/emotion_cnn_resampled.keras`
+- `models/emotion_cnn_resampled_normalization.npz`
+
+The CNN predictor requires TensorFlow/Keras and the audio-processing dependencies used during training. Run it using a Python environment in which these dependencies are installed and compatible with the saved model.
+
+From the repository root, run:
+
+```powershell
+python .\Task2_Emotion_Recognition\src\predict_emotion_cnn.py ".\Task2_Emotion_Recognition\Actor_01\03-01-01-01-01-01-01.wav"
+```
+
+The script prints the predicted emotion and its model probability. This probability is not a calibrated confidence score.
+
+Example output:
+
+```text
+Predicted emotion: Neutral
+Model probability: 27.84%
+Note: This probability is not a calibrated confidence score.
+```
+
+The example output is from one test recording; predictions can differ for other audio files.
+
 ## Evaluation Results
 
 The baseline RBF Support Vector Machine (SVM) produced the following six-fold actor-grouped cross-validation results:
@@ -165,8 +218,8 @@ The baseline RBF Support Vector Machine (SVM) produced the following six-fold ac
 | Accuracy | 44.44% |
 | Balanced accuracy | 43.36% |
 | Mean fold macro F1-score | 0.4206 |
-| Accuracy standard deviation | 0.0558 |
-| Balanced accuracy standard deviation | 0.0458 |
+| Accuracy standard deviation | 5.58 percentage points |
+| Balanced accuracy standard deviation | 4.58 percentage points |
 | Macro F1 standard deviation | 0.0409 |
 
 The RBF SVM outperformed the tested Random Forest, Extra Trees, Linear SVM, and Logistic Regression configurations in the recorded comparisons.
@@ -174,6 +227,24 @@ The RBF SVM outperformed the tested Random Forest, Extra Trees, Linear SVM, and 
 The enhanced 174-feature representation did not improve performance over the original 80-feature baseline in this experiment.
 
 See the `results/` directory for detailed metrics, classifier comparisons, tuning results, out-of-fold predictions, and the confusion matrix.
+
+## CNN Evaluation
+
+The resampled CNN model was evaluated using five-fold GroupKFold cross-validation, with recordings grouped by actor.
+
+| Metric | Resampled CNN |
+|---|---:|
+| Accuracy | 47.50% |
+| Balanced accuracy | 44.53% |
+| Macro F1-score | 0.4140 |
+| Mean fold accuracy | 47.42% ± 6.84 percentage points |
+| Mean fold macro F1-score | 0.4049 ± 0.0739 |
+
+A separate experiment using class-weighted training achieved 40.63% accuracy, 40.04% balanced accuracy, and a macro F1-score of 0.3728. Although class weighting improved detection of the neutral class, it reduced overall performance in this experiment.
+
+The unweighted resampled CNN performed poorly on the neutral class, achieving a neutral-class F1-score of 0.000 in its out-of-fold evaluation. This highlights the need for further improvement in class-specific performance.
+
+**Comparison note:** The SVM uses six-fold actor-grouped cross-validation, while the CNN uses five-fold actor-grouped cross-validation. Therefore, their results are not a perfectly matched comparison.
 
 ## Testing
 

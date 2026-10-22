@@ -1,0 +1,29 @@
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local environment variables
+.env
+.env.*
+
+# Raw RAVDESS dataset audio
+Task2_Emotion_Recognition/Actor_*/
+Task2_Emotion_Recognition/audio_speech_actors_01-24.zip
+
+# Generated datasets can be recreated with the preparation scripts
+Task2_Emotion_Recognition/data/processed/
+
+# Keep the trained model and evaluation artifacts in Git

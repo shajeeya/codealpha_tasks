@@ -31,3 +31,9 @@ Task2_Emotion_Recognition/data/processed/
 # Task 3 generated files
 .venv_task3/
 Task3_Handwritten_Recognition/src/__pycache__/
+
+# Air-writing environment
+.venv_airwriting/
+
+# Temporary webcam diagnostic script
+webcam_test.py

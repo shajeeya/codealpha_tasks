@@ -79,7 +79,7 @@ Python 3.12 is used for this project.
 Install the required libraries in your Python environment:
 
 ```bash
-pip install tensorflow numpy matplotlib pillow scikit-learn
+pip install -r Task3_Handwritten_Recognition/requirements.txt
 ```
 
 ## ▶️ Train the Model

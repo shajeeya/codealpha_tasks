@@ -27,3 +27,7 @@ Task2_Emotion_Recognition/audio_speech_actors_01-24.zip
 Task2_Emotion_Recognition/data/processed/
 
 # Keep the trained model and evaluation artifacts in Git
+
+# Task 3 generated files
+.venv_task3/
+Task3_Handwritten_Recognition/src/__pycache__/

@@ -1,0 +1,60 @@
+{
+    "dataset": "default of credit card clients.xls",
+    "target": "default payment next month",
+    "rows_used": 30000,
+    "features_used": [
+        "LIMIT_BAL",
+        "SEX",
+        "EDUCATION",
+        "MARRIAGE",
+        "AGE",
+        "PAY_0",
+        "PAY_2",
+        "PAY_3",
+        "PAY_4",
+        "PAY_5",
+        "PAY_6",
+        "BILL_AMT1",
+        "BILL_AMT2",
+        "BILL_AMT3",
+        "BILL_AMT4",
+        "BILL_AMT5",
+        "BILL_AMT6",
+        "PAY_AMT1",
+        "PAY_AMT2",
+        "PAY_AMT3",
+        "PAY_AMT4",
+        "PAY_AMT5",
+        "PAY_AMT6"
+    ],
+    "test_size": 0.2,
+    "random_state": 42,
+    "selection_metric": "ROC-AUC, with F1-score as tie-breaker",
+    "best_model": "Random Forest",
+    "results": [
+        {
+            "model": "Random Forest",
+            "accuracy": 0.782,
+            "precision": 0.5061969993476843,
+            "recall": 0.584777694046722,
+            "f1_score": 0.5426573426573427,
+            "roc_auc": 0.7743796192625434
+        },
+        {
+            "model": "Decision Tree",
+            "accuracy": 0.7336666666666667,
+            "precision": 0.42931664058424623,
+            "recall": 0.6201959306706858,
+            "f1_score": 0.5073982737361282,
+            "roc_auc": 0.7442449860677293
+        },
+        {
+            "model": "Logistic Regression",
+            "accuracy": 0.6781666666666667,
+            "precision": 0.36765994741454866,
+            "recall": 0.6322532027128862,
+            "f1_score": 0.4649487392629537,
+            "roc_auc": 0.7105606434759414
+        }
+    ]
+}

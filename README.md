@@ -1,8 +1,31 @@
 # CodeAlpha Machine Learning Internship
 
-This repository contains machine learning projects developed as part of my CodeAlpha internship.
+This repository contains machine learning projects developed as part of my CodeAlpha Machine Learning Internship.
 
 ## Projects
+
+### Task 1 — Credit Scoring Model
+
+A supervised machine learning project that predicts the likelihood of next-month credit-card default using historical financial and repayment data.
+
+**Highlights**
+- UCI Default of Credit Card Clients dataset
+- Data preprocessing and feature engineering
+- Logistic Regression, Decision Tree, and Random Forest comparison
+- Evaluation using accuracy, precision, recall, F1-score, and ROC-AUC
+- Saved model pipeline and evaluation reports
+- Interactive Streamlit prediction application
+
+**Best model:** Random Forest
+
+**Test-set results**
+- Accuracy: 78.20%
+- Precision: 50.62%
+- Recall: 58.48%
+- F1-score: 0.5427
+- ROC-AUC: 0.7744
+
+[View Task 1 documentation and source code](Task1_Credit_Scoring/)
 
 ### Task 2 — Speech Emotion Recognition
 
@@ -36,12 +59,14 @@ A deep learning project that recognizes handwritten digits from 0 to 9 using a C
 ## Technologies
 
 - Python
-- TensorFlow and Keras
-- NumPy and Pandas
+- Pandas and NumPy
 - scikit-learn
+- TensorFlow and Keras
 - Librosa
+- Streamlit
 - OpenCV and MediaPipe
-- Matplotlib
+- Matplotlib and Seaborn
+- Joblib
 - Git and GitHub
 
 ## Repository Structure
@@ -50,6 +75,16 @@ A deep learning project that recognizes handwritten digits from 0 to 9 using a C
 CodeAlpha_Tasks/
 ├── README.md
 ├── .gitignore
+├── Task1_Credit_Scoring/
+│   ├── README.md
+│   ├── app.py
+│   ├── requirements.txt
+│   ├── requirements-lock.txt
+│   ├── data/
+│   ├── models/
+│   ├── reports/
+│   └── src/
+│       └── train_model.py
 ├── Task2_Emotion_Recognition/
 │   ├── README.md
 │   ├── src/
@@ -69,9 +104,10 @@ CodeAlpha_Tasks/
 
 ## Notes
 
-- Python virtual environments and raw datasets are excluded from version control.
+- Python virtual environments and raw datasets are excluded from version control where configured.
 - Refer to each project's README for setup instructions and dependencies.
 - Model evaluation results are reported transparently, including known limitations.
+- Task 1 is an educational credit-risk prediction demonstration, not a validated lending decision system.
 - Task 3 includes an optional webcam-based air-writing enhancement in addition to image-based handwritten digit recognition.
 
 ## Author

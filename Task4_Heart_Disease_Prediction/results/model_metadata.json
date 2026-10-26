@@ -1,0 +1,26 @@
+{
+  "model_name": "Logistic Regression",
+  "feature_names": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "target_mapping": {
+    "0": "No disease",
+    "1-4": "Disease present"
+  },
+  "dataset": "UCI Heart Disease - Cleveland",
+  "test_size": 0.2,
+  "random_state": 42,
+  "note": "Educational model only; not validated for clinical diagnosis."
+}

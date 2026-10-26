@@ -37,3 +37,13 @@ Task3_Handwritten_Recognition/src/__pycache__/
 
 # Temporary webcam diagnostic script
 webcam_test.py
+
+
+# Task 4 virtual environments
+.venv_task4/
+.venv_task4_py314/
+
+# Test and Python tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

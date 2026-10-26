@@ -11,35 +11,21 @@ A supervised machine learning project that predicts the likelihood of next-month
 **Highlights**
 - UCI Default of Credit Card Clients dataset
 - Data preprocessing and feature engineering
-- Logistic Regression, Decision Tree, and Random Forest comparison
+- Comparison of Logistic Regression, Decision Tree, and Random Forest
 - Evaluation using accuracy, precision, recall, F1-score, and ROC-AUC
 - Saved model pipeline and evaluation reports
 - Interactive Streamlit prediction application
 
-**Best model:** Random Forest
+**Best Model:** Random Forest
 
-**Test-set results**
+**Test-Set Results**
 - Accuracy: 78.20%
 - Precision: 50.62%
 - Recall: 58.48%
 - F1-score: 0.5427
 - ROC-AUC: 0.7744
 
-[View Task 1 documentation and source code](Task1_Credit_Scoring/)
-
-### Task 2 — Speech Emotion Recognition
-
-A machine learning project that classifies emotions from speech recordings using MFCC-based audio feature extraction and supervised learning.
-
-**Highlights**
-- RAVDESS speech dataset
-- Audio feature extraction using Librosa
-- SVM, Random Forest, and Extra Trees evaluation
-- Actor-independent cross-validation
-- WAV audio prediction script
-- Evaluation metrics and confusion matrix
-
-[View Task 2 documentation](Task2_Emotion_Recognition/README.md)
+[View Task 1 Documentation and Source Code](Task1_Credit_Scoring/)
 
 ### Task 3 — Handwritten Digit Recognition Using CNN
 
@@ -48,13 +34,13 @@ A deep learning project that recognizes handwritten digits from 0 to 9 using a C
 **Highlights**
 - MNIST dataset with 60,000 training images and 10,000 test images
 - CNN model built using TensorFlow and Keras
-- **98.94% test accuracy** on the MNIST test dataset
+- 98.94% test accuracy on the MNIST test dataset
 - Custom handwritten digit image prediction
-- **Live air-writing digit recognition using a webcam**
+- Live air-writing digit recognition using a webcam
 - Hand tracking using MediaPipe and OpenCV
 - Real-time digit prediction using the trained CNN
 
-[View Task 3 documentation and source code](Task3_Handwritten_Recognition/)
+[View Task 3 Documentation and Source Code](Task3_Handwritten_Recognition/)
 
 ## Technologies
 
@@ -62,7 +48,6 @@ A deep learning project that recognizes handwritten digits from 0 to 9 using a C
 - Pandas and NumPy
 - scikit-learn
 - TensorFlow and Keras
-- Librosa
 - Streamlit
 - OpenCV and MediaPipe
 - Matplotlib and Seaborn
@@ -85,11 +70,6 @@ CodeAlpha_Tasks/
 │   ├── reports/
 │   └── src/
 │       └── train_model.py
-├── Task2_Emotion_Recognition/
-│   ├── README.md
-│   ├── src/
-│   ├── models/
-│   └── results/
 └── Task3_Handwritten_Recognition/
     ├── README.md
     ├── requirements.txt
